@@ -60,7 +60,7 @@ class MensajesSinLeerCampus(MycroftSkill):
 
         # Almacenamiento de la informacion en el fichero JSON
         informacion['mensajes'].append({
-            'totales_sin_leer': numeroMensajes,
+            'totales_sin_leer': str(numeroMensajes),
         })
 
         with open(ficheroJSON, 'w') as ficheroDatos:
