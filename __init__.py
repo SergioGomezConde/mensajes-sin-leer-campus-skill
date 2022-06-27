@@ -1,9 +1,15 @@
+from fileinput import close
 import time
+import json
 
 from mycroft import MycroftSkill, intent_file_handler
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+
+# Fichero JSON donde almacenar la informacion
+ficheroJSON = "/home/serggom/data.json"
+informacion = {'asignaturas': [], 'usuario': [], 'eventos': [], 'siguiente_evento': [], 'mensajes': []}
 
 
 def inicio_sesion(self):
@@ -52,15 +58,35 @@ class MensajesSinLeerCampus(MycroftSkill):
         numeroMensajes = str(driver.find_element(
             by=By.XPATH, value='/html/body/nav/ul[2]/div[3]/a/div').get_attribute('aria-label').split(' ')[1])
 
-        # Respuesta con el numero de mensajes totales sin leer
-        if(numeroMensajes == "0"):
-            self.speak("No tienes ningun mensaje sin leer")
+        # Almacenamiento de la informacion en el fichero JSON
+        informacion['mensajes'].append({
+            'totales_sin_leer': numeroMensajes,
+        })
 
-        elif(numeroMensajes == "1"):
-            self.speak("Tienes un mensaje sin leer")
+        with open(ficheroJSON, 'w') as ficheroDatos:
+                json.dump(informacion, ficheroDatos, indent=4)
 
-        else:
-            self.speak("Tienes " + numeroMensajes + " mensajes sin leer")
+        # Lectura de la informacion del fichero JSON
+        with open(ficheroJSON) as ficheroMensajes:
+            data = json.load(ficheroMensajes)
+            if(data['mensajes'][0] == "0"):
+                self.speak("No tienes ningun mensaje sin leer")
+
+            elif(data['mensajes'][0] == "1"):
+                self.speak("Tienes un mensaje sin leer")
+
+            else:
+                self.speak("Tienes " + data['mensajes'][0] + " mensajes sin leer")
+
+        # # Respuesta con el numero de mensajes totales sin leer
+        # if(numeroMensajes == "0"):
+        #     self.speak("No tienes ningun mensaje sin leer")
+
+        # elif(numeroMensajes == "1"):
+        #     self.speak("Tienes un mensaje sin leer")
+
+        # else:
+        #     self.speak("Tienes " + numeroMensajes + " mensajes sin leer")
 
         driver.close()
 
