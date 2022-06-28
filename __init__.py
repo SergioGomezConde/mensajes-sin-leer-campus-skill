@@ -58,6 +58,8 @@ class MensajesSinLeerCampus(MycroftSkill):
         numeroMensajes = str(driver.find_element(
             by=By.XPATH, value='/html/body/nav/ul[2]/div[3]/a/div').get_attribute('aria-label').split(' ')[1])
 
+        time.sleep(20)
+        
         # Almacenamiento de la informacion en el fichero JSON
         psl = str(driver.find_element(by=By.XPATH, value='/html/body/div[4]/div[2]/div/div/section/div/div/div/div/div/div/div[1]/div/div[2]/div[1]/div/div[3]/div[1]/button/span[5]').get_attribute('aria-label').split(' ')[1])
         informacion['mensajes'].append({
