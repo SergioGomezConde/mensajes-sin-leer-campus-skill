@@ -8,7 +8,7 @@ from mycroft import MycroftSkill, intent_file_handler
 # from selenium.webdriver.common.by import By
 
 # Fichero JSON donde almacenar la informacion
-ficheroJSON = "/home/serggom/data.json"
+ficheroJSON = "/home/serggom/scraping/data.json"
 # informacion = {'asignaturas': [], 'usuario': [], 'eventos': [], 'siguiente_evento': [], 'mensajes': []}
 
 
