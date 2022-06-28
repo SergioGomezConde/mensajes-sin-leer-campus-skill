@@ -79,7 +79,7 @@ class MensajesSinLeerCampus(MycroftSkill):
             'privados_sin_leer': privados_sin_leer
         })
         
-        with open(ficheroJSON, '+') as ficheroDatos:
+        with open(ficheroJSON, 'a') as ficheroDatos:
                 json.dump(informacion, ficheroDatos, indent=4)
         ficheroDatos.close()
 
