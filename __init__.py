@@ -20,10 +20,10 @@ class MensajesSinLeerCampus(MycroftSkill):
             # Lectura de la informacion del fichero JSON
             with open(ficheroJSON) as ficheroMensajes:
                 data = json.load(ficheroMensajes)
-                if (data['mensajes'][0]['totales_sin_leer'] == "0"):
+                if data['mensajes'][0]['totales_sin_leer'] == "0":
                     self.speak("No tienes ningun mensaje sin leer")
 
-                elif (data['mensajes'][0]['totales_sin_leer'] == "1"):
+                elif data['mensajes'][0]['totales_sin_leer'] == "1":
                     self.speak("Tienes un mensaje sin leer")
 
                 else:
